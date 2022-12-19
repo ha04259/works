@@ -1,1 +1,143 @@
 
+#### today notes ####
+git common scenarios:
+
+1. git cherry-pick
+you have branches like develop and  release. you have requirement to pick few commits from develop to release branch. below is steps needs to perform
+
+step:a first pull all remote changes to local
+git checkout master
+git pull -- pull all remote changes to local
+
+step:b switch to branch where you want to cherry-pick commits
+git checkout develop
+git cherry-pick (commit-id)
+
+2. How to resolve conflicts while merging code from one branch to another
+i want to merge changes release branch to master
+git checkout master
+git pull
+git checkout release
+git pull origin release
+git merge master
+resolve conflicts on release branch
+git add (files that were conflicted)
+git commit -m "commit message"
+git push origin release
+
+3. Revert bad merge commit in Github (Before doing this activity take backup of original branch)
+git checkout develop
+git reset commit-id (last good commit)
+remove develop branch in remote (github)
+git push origin develop (this will create new branch in github)
+
+4. revert commit made by user to specific branch (this works only for last commit of remote branch) you can not revert specific commit.
+git checkout develop
+git revert commit-id (bad commit)
+git push origin develop
+
+
+5. branching startegy 
+master: branch have production copy code
+develop: active development branch 
+rel_01: this branch we cut from develop for each sprint. with this branch will test first stage environment then will push changes to production with same rel_01 branch
+
+a) after each release will merge release changes to master (master is a backup of production copy)
+
+
+=======================
+Git Setup for your project
+1. Download and install Git Bash from the links 
+   https://git-scm.com/downloads
+   https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+
+2. Configure git 
+   git config --global user.name '<your name>'
+   git config --global user.email '<your-email>
+3. Add ssh keys to your account
+   ssh-keygen -t rsa -b 4096 -C "<your org email>"
+
+4. Working Area(local files or untracked files) -- Staging Area(git add) -- Local Repository(git commit) -- Remote Repository(git push)  	
+
+   
+$ git help
+usage: git [--version] [--help] [-C <path>] [-c <name>=<value>]
+           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]
+           [-p | --paginate | --no-pager] [--no-replace-objects] [--bare]
+           [--git-dir=<path>] [--work-tree=<path>] [--namespace=<name>]
+           <command> [<args>]
+
+These are common Git commands used in various situations:
+
+start a working area (see also: git help tutorial)
+   clone      Clone a repository into a new directory
+   init       Create an empty Git repository or reinitialize an existing one
+
+work on the current change (see also: git help everyday)
+   add        Add file contents to the index
+   mv         Move or rename a file, a directory, or a symlink
+   reset      Reset current HEAD to the specified state
+   rm         Remove files from the working tree and from the index
+
+examine the history and state (see also: git help revisions)
+   bisect     Use binary search to find the commit that introduced a bug
+   grep       Print lines matching a pattern
+   log        Show commit logs
+   show       Show various types of objects
+   status     Show the working tree status
+
+grow, mark and tweak your common history
+   branch     List, create, or delete branches
+   checkout   Switch branches or restore working tree files
+   commit     Record changes to the repository
+   diff       Show changes between commits, commit and working tree, etc
+   merge      Join two or more development histories together
+   rebase     Reapply commits on top of another base tip
+   tag        Create, list, delete or verify a tag object signed with GPG
+
+collaborate (see also: git help workflows)
+   fetch      Download objects and refs from another repository
+   pull       Fetch from and integrate with another repository or a local branch
+   push       Update remote refs along with associated objects
+
+'git help -a' and 'git help -g' list available subcommands and some
+concept guides. See 'git help <command>' or 'git help <concept>'
+to read about a specific subcommand or concept.
+
+
+
+
+
+==============
+workspace
+staging area
+loacl repository
+remote repository
+fork
+git remote add origin (what is git remote)
+git add
+git status
+git commit
+git push
+git pull
+git checkout
+====================
+branch " develop "
+
+git branch
+* main
+git checkout -b develop  -- creates new branch and switch it to the new branch
+
+git branch
+* develop
+  main
+
+git push origin develop
+
+git branch -r  -- > nutan 1 (develop) ---hareesh 2 (master,release)
+
+git branch -r
+origin/main
+origin/develop
+origin/master
+origin/release
