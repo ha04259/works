@@ -1,11 +1,9 @@
 with help of this script you
 # To use your IAM credentials to authenticate the Terraform AWS provider, set the AWS_ACCESS_KEY_ID environment variable.
 set AWS_ACCESS_KEY_ID=dummy #windows
-export AWS_ACCESS_KEY_ID=dummy #linux or mac
 
 # set your secret key.
 set AWS_SECRET_ACCESS_KEY=dummy #windows
-export AWS_SECRET_ACCESS_KEY=dummy #linux or mac
 
 cd "C:\Workspace\ioc\terraform"
 
@@ -18,17 +16,13 @@ cd .\hello
 
 # Create a file to define your infrastructure
 New-Item main.tf #windows 
-touch main.tf # linux or mac
 
 # Open main.tf using notepad
 notepad.exe main.tf # windows
-vi main.tf # linux or mac
 
 # View the configuration in main.tf
 cls # windows
-clear #linux or mac
 type .\main.tf # windows
-cat .\main.tf # linux or mac
 
 # Initializing a configuration directory downloads and installs the providers defined in the configuration, which in this case is the aws provider.
 terraform init
