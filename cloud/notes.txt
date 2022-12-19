@@ -1,0 +1,3 @@
+https://cloud.google.com/free/docs/aws-azure-gcp-service-comparison
+https://intellipaat.com/blog/aws-vs-azure-vs-google-cloud/#no1
+https://www.veritis.com/blog/aws-vs-azure-vs-gcp-the-cloud-platform-of-your-choice/
