@@ -1,0 +1,9 @@
+1. Git/github
+2. Application(tomcat app)
+3. Github actions
+4. Push image to ACR
+5. Manifest files(helm/ksonnet/jsonnet/kustomize) (how to update manifest files)
+6. ArgoCD (GitOps sync/pull)
+7. ArgoCD deploy kubernetes(AKS/GKE/EKS)
+8. Pull image AKS/GKE/EKS cluster
+9. Deployment objects(Deployment object/Ingress(or)ALB(or)API Gateway/Service/Replicaset/PodDisruptionBudget/HPA/Pods)
