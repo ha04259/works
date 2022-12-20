@@ -1,0 +1,698 @@
+########## What is Automation ##########
+Automation is a process by which we can complete any task with less human intervention or whithout human intervention.
+(or)
+Completing a task with scripting (Shell Scripting, Python Scripting etc..)
+
+1) Simple automation example:
+task: deploy jenkins on Tomcat server.
+
+Solution: How to Automate above task
+a) get all manual steps(commands)
+   step:1 to run tomcat and jenkins prerequsite is java. 
+   step:2 tomcat download, extract tomcat and create tomcat home
+   step:3 move jenkins to tomcat webapps/ dir
+   step:4 start tomcat server
+   step:5 launch jenkins on browser (ipaddress:8080)
+b) write script
+c) execute shell script.
+
+
+2) why automation?
+a) Accuracy in data handling
+b) To improve prodcutivity
+c) To reduce employee power
+d) faster and cheaper
+
+
+3) How automation can be achieved?
+a) Perl sccript
+b) Go Script
+c) Shell Script
+d) Python Script
+e) YAML Script
+f) Ruby Script
+g) Perl Script
+
+4) Automation tools
+Automation tools are helps to trigger your scripts on multiple servers.
+Automation tools and automation scripts are different.
+ex: cron is a automation tool, cron is a scheduler used to trigger your shell script. 
+
+5) Usecases:
+a) Automation for Unix/Linux OS tasks
+b) Automation for Middleware apps and webServers
+c) Automation for Database tasks
+d) Automation for Devops tasks.
+
+########## What is Scripting and Programming ##########
+1. What is Scripting?
+To automate some tasks scripting required.shell,python,ruby,perl etc are scripting langauge.
+2. What is Programming language?
+To make some application we required programming language. java,python,c# etc are programming language.
+
+Interiew questions:
+1. Difference between Interpreter vs compiler ?
+2. Difference between Scripting langs vs Programming langusges ?
+########## What is Shell and Shell Scripting ##########
+# help -m
+1. What is Shell?
+Shell is a interpreter. which is used to run your commands.So shell is an interface beween user and Operating System Kernel. In Unix-like systems, we are having different types of Shells or interpreters.
+They are:
+Bash Shell
+Sh Shell
+C Shell
+K Shell
+
+2. An OS starts a shell for each user when the user opens a terminal or Login into a system.
+
+3. What is Shell scripting
+ShellScripting is a group of commands written in a sequnce to automate.
+
+4. Shell Scripting is similar with all types of other Shells but syntaxes may vary.
+
+5. Here we are discussing Bash Shell scripting. 
+
+6. To check available shells in your OS
+   # cat /etc/shells 
+
+7. To check default shell assigned to your os.
+   # echo $SHELL (or) which $SHELL
+
+8. To check bash shell version.
+   # /bin/bash --version
+
+9. To check bash shell binary location in your system.
+   # which bash
+
+
+Interview questions:
+1. What is Shell ?
+2. What is Terminal ?
+3. What is Kernel ?
+4. What is OS?
+5. Explain Linux Boot process?
+########## Why Bash shell only ##########
+1. Bash shell is the advanced shell.
+2. Bash is an sh-compatible shell that incorporates useful features from the korn shell(ksh) and Cshell(csh)
+3. Bash is default shell for most Linux systems.
+
+########## Steps to write and Execute Bash Shell Script ##########
+First way:
+step:1 create a script with vi
+vi demo.sh
+echo "Hello World"
+:wq --> to save
+
+step:1 run script
+/bin/bash demo.sh
+
+
+Second way:
+step:1 create a script with vi
+vi demo.sh
+#!/bin/bash
+echo "Hello World"
+:wq --> to save
+
+step:2 provide execute permission
+chmod +x demo.sh
+
+step:3 run script.
+./demo.sh
+
+Note: Second way is recomended way to create script in real time.
+
+Interview Questions:
+1) what is #!/bin/bash in bash script file. (very important to understand shebang)
+ans: shebang or hashbang or interpreter
+########## How to debug Bash Shell Script ##########
+Debug a script:
+sh -x demo.sh
+or
+sh -xv hello.sh
+########## Understanding PATH variable in Linux ##########
+PATH is a environment variable.it contain system executable paths.
+
+1) Understanding ls command
+root@linuxmint:~# echo $PATH
+/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+
+root@linuxmint:~# which ls
+/bin/ls
+
+root@linuxmint:~# ls -ltrh
+total 4.0K
+-rw-r--r-- 1 root root    0 May 26 00:45 test
+drwxr-xr-x 2 root root 4.0K May 26 00:45 file
+
+If ls command not located in system path, ls command won't work. here 'ls' is system command.
+
+2) How to run user defined shell script as system command (here you understand how PATH variable used practically)
+step:1 create directory: 
+mkdir /home/hareesh/bin
+step:2 create sample shell script
+vi demo.sh
+#!/bin/bash
+echo "Hello World"
+:wq -->to save
+step:3 provide execute permission
+# chmod +x demo.sh
+
+step:4 run script 
+# ./demo.sh
+
+step:5 rename script file
+# mv demo.sh demo
+
+step:6 add your script path to PATH varible
+# PATH=$PATH:/home/hareesh/bin (# this is temporary way to set your script path to PATH variable.you can also set permanently)
+
+step:7 run your script as system command.
+# demo
+
+########## Comments in Bash Script ##########
+single line comment:
+# this is comment
+
+multi line comments:
+<<comment1
+    comment 1
+    comment 2
+    comment 3
+comment1
+
+########## echo command in Linux: ##########
+# echo is the basic command for printing in the terminal
+echo "Welcome to Bash"
+echo 'Welcome to Bash scripting'
+echo  Welcome to Bash Scripting
+
+########## Variables and Data types in Bash: ##########
+
+variable: variable is used to store some value
+
+x=4
+to access value of x:
+echo $x
+or
+echo "$x"
+or
+echo "${x}" # this is best way to access variable x
+
+examples:
+ex:1
+person_name=Hareesh
+person_age=28
+echo "${person_name}"
+echo "${person_age}"
+
+ex:2
+person_name="Hareesh"
+person_age=28
+echo "${person_name}" " is Cool"
+echo "I am " "${person_age}" " years old"
+
+ex:3
+person_name="Hareesh"
+person_age=28
+echo "There once was a man named " "${person_name}" ", "  
+echo "he was " "${person_age}"  " years old ." 
+echo "He really liked the name " "${person_name}" ", " 
+echo "but didn't like being " "${person_age}" "."
+
+
+1. Don't provide space on either side of = sysmbol
+   ex: x=2 is correct
+       x= 2 or x =2 or x = 2 throw error
+2. Always create variable names with small letterts (bcoz environemrnt variables have capitals. if you create your variables as Capital it going to conflict with environment variables)
+   name="Hareesh"
+
+ex:4 dealing with int,float and string/text/group of characters
+x=2
+x=4.56
+x="shell" #always choose double quotes for string type.
+
+4. There is no data type in bash or shell. 
+datatype: based on type of data you are storing into variable 
+
+By default all variables treat as string variabe in bash and shell. (this is very imp question in interview)
+ex:
+mynumber=278   # here you defined integer, shell treats this variable as a string
+mysalary=50000.50 # here you defined float, shell treats this variable as a string
+
+5. If you didn't define the variable and trying to access the variable using echo you will get empty
+echo "${x}"
+
+note: unlike other programing languages like python you will get error
+
+########## Types of Shell scripting Variables: ##########
+
+In shell or bash we have 3 types of variables.
+1. Userdefined varaibles. --deined by user
+2. Environment varaibles or System variables. --defined by OS and maintained by your shell
+3. Special variables
+
+1. Userdefined varaibles: variables defined by user. (In variables topic section we discussed all userdefined variables)
+ex:
+x=2
+echo "${x}"
+
+2. Environment varaibles or System variables.
+created by operating system.
+
+examples: all system varalbes have defined with Capital letters.
+echo $HOME
+echo $USER
+echo $PWD
+echo $SHELL
+to view System variables type below command
+# set
+or
+# printenv
+or
+# env
+
+3. Special variables:
+
+example script:
+#!/bin/bash
+# special variables
+echo "File Name: $0" # The filename of the current script.
+echo "First Parameter : $1" #first argument $n
+echo "Second Parameter : $2" #second argument
+echo "Second Parameter : $3" # third argument
+echo "Quoted Values: $@"  # all argumets
+echo "Quoted Values: $*"  # all argumets
+echo "Total Number of Parameters : $#" #The number of arguments supplied to a script.
+echo "current shell: $$" #The process number of the current shell.
+
+$? -- previously executed command success(0) or not(some numeric value)
+$!
+
+
+
+
+########## Operators in Bash and Shell: ##########
+let "z=2**3"
+hareesh@linuxmint:~$ echo "z = $z"
+z = 8
+
+########## printf command in Bash and Shell: ##########
+
+########## set and unset command in Bash and Shell: ##########
+set: set is used to display environment vvariables.
+# set
+
+unset: unset is used free up memory.
+ex: To understand better execute below code in your machine.
+vech=Bus
+echo $vech
+unset vech
+echo $vech
+
+########## readonly and declare command Bash and Shell: ##########
+You can create the constants variables using the readonly command or declare command.
+
+readonly: 
+NAME="Hareesh"
+readonly NAME
+NAME="Rajesh" #bash: NAME: readonly variable
+
+declare: 
+MYNAME="Rajesh"
+declare -r MYNAME
+MYNAME="Hareesh" #bash: MYNAME: readonly variable
+
+########## export command in Bash and Shell: ##########
+export have multiple benefits.
+1. If you define any variable on command line that variable you can access from your shell script, if that varaible is exported through your command line.
+# x=20
+# export x 
+
+2. To view all the exported variables.
+# export
+
+3. To view all exported variables on current shell.
+# export -p
+
+Task: check other features as well
+
+########## alias/unalias command in Bash ##########
+Create and use aliases
+syntax:
+alais aliasname='command arguments'
+# alias parent='cd world/asia/india/ap/hyd'
+# parent
+# pwd
+
+examples:
+# alias c='clear'
+# c
+
+# alias d='date'
+# d
+
+remove the alias
+unalias parent
+unalias c
+unalias d
+
+
+How do I permanently add aliases to my session?
+1. If you want to add aliases for every user, place them either in /etc/bashrc or /etc/profile.d/useralias.sh file. Please note that you need to create /etc/profile.d/   useralias.sh file.
+2. User specific alias must be placed in ~/.bashrc ($HOME/.bashrc) file.
+
+########## expr command in Bash ##########
+# expr --help
+
+
+examples:arithmetic (+ - * / %)
+# expr 10 + 10 # arithmetic sum of ARG1 and ARG2
+20
+# expr 10 - 2  # arithmetic difference of ARG1 and ARG2
+8
+# expr 20 \* 2 # arithmetic product of ARG1 and ARG2
+40
+# expr 10 / 2  #  arithmetic quotient of ARG1 divided by ARG2
+5
+# expr 10 % 2  # arithmetic remainder of ARG1 divided by ARG2
+0
+
+examples:comparison operators (if expression returns 1 means its true, if expression returns 0 means its false) (= != < <= > >=)
+# expr 2 = 2     # ARG1 is equal to ARG2 
+1
+# expr hareesh != mahesh    # ARG1 is unequal to ARG2 
+1
+# expr 2 \< 10   # ARG1 is less than ARG2 
+1
+# expr 10 \> 2   # ARG1 is greater than ARG2
+1
+expr 10 \>= 2    # ARG1 is greater than or equal to ARG2
+1
+expr 2 \<= 2     # ARG1 is less than or equal to ARG2
+1
+
+examples: | (OR) operation
+expr length  "hareesh"  "<"  5  "&"  19  -  6  ">"  10
+0
+
+examples: & (AND) operation
+expr length  "hareesh"  "<"  5  "|"  19  -  6  ">"  10
+1
+
+Note: Beware that many operators need to be escaped or quoted for shells
+
+examples: strings
+ex:1 Finding length of a string
+# name="Hareesh"
+# len=`expr length $name`
+# echo $len
+7
+ex:2 Finding substring of a string
+# name="Hareesh"
+# sub=`expr substr $name 2 3`
+# echo $sub
+are
+########## eval command in Bash: ##########
+eval:Execute arguments as a shell command.
+Combine ARGs into a single string, use the result as input to the shell,and execute the resulting commands.
+# command="ls -ltrh"
+# eval $command
+########## read command in Bash: ##########
+User input in Shell: The command read in the Linux is used to read the input from the keyboard. 
+example:simple read
+# read
+Hello my name is Hareesh
+# echo $REPLY
+Hello my name is Hareesh
+
+example:read -p “ prompt_text”
+# read -p "Enter your name: "
+Enter your name: My name is Hareesh
+# echo $REPLY
+My name is Hareesh
+
+example:read variable
+# read name
+Hareesh
+# echo myname is $name
+myname is Hareesh
+
+example:read -n
+# read -n 5 -p "Enter your name in 5 characters only: "
+Enter your name in 5 characters only: kiran
+# echo $REPLY
+kiran
+
+########## escape sequnce  in Bash: ##########
+If -e is in effect, the following sequences are recognized:
+
+\\     backslash
+
+\a     alert (BEL)
+
+\b     backspace
+
+\c     produce no further output
+
+\e     escape
+
+\f     form feed
+
+\n     new line
+
+\r     carriage return
+
+\t     horizontal tab
+
+\v     vertical tab
+
+anil@anil-Rev-1-0:~$ echo -e "Hello\\ how are you"
+Hello\ how are you
+anil@anil-Rev-1-0:~$ echo -e "Hello\a how are you"
+Hello how are you
+anil@anil-Rev-1-0:~$ echo -e "Hello\b how are you"
+Hell how are you
+anil@anil-Rev-1-0:~$ echo -e "Hello\c how are you"
+Helloanil@anil-Rev-1-0:~$ echo -e "Hello\f how are you"
+Hello
+      how are you
+anil@anil-Rev-1-0:~$ echo -e "Hello\n how are you"
+Hello
+ how are you
+anil@anil-Rev-1-0:~$ echo -e "Hello\r how are you"
+ how are you
+anil@anil-Rev-1-0:~$ echo -e "Hello\t how are you"
+Hello	 how are you
+anil@anil-Rev-1-0:~$ echo -e "Hello\v how are you"
+Hello
+      how are you
+
+########## Arrays in Bash: ##########
+Now,we are going assigns the string "Hello World" to the a array variable then echoes out the value of the variable, as below:
+$ array_vr=(Hello World)
+$ echo $array_vr
+Note: An entire array must be assigned by enclosing the array items in parenthesis.
+
+ex:1
+We can also assign the individual items of array variables, as below:
+$ array_vr[0]=Hello
+$ array_vr[1]=World
+
+if we want to echoes out the value ofan array item:
+$ echo ${array_vr[0]} ${array_vr[1]}
+
+ex:2
+$ array_fruits=(banana apple grape papaya pomogranet orange watermelon)
+$ echo ${array_fruits[0]}
+banana
+
+All of items in array:
+syntax: ${array_vr[*]}
+$ echo ${array_fruits[*]}
+
+All of the indexes in the array:
+syntax: ${!array_vr[*]}
+$ echo ${!array_fruits[*]}
+
+Number of items in the array:
+syntax: ${#array_vr[*]}
+$ echo ${#array_fruits[*]}
+
+Length of item zero index
+syntax: ${#array_vr[0]}
+$ echo ${#array_fruits[0]}
+########## Fuctions in Shell: ##########
+function: A function is a group of commands that are assigned a name that acts like a handle to that group of commands. To execute this group of commands defined in the function, you simply call the function by the name you provided.
+
+Why Functions in Shell Script?
+• It helps us to reuse the code.
+• Improve the readability of the program.
+• Efficient use of variables inside the program.
+• Allows us to test the program part by part.
+• Displays program as a bunch of sub-steps.
+
+Syntax to use:
+ Syntax1:
+ function function_name
+ {
+ ###set of commands
+ }
+
+ Syntax2:
+ function_name()
+ {
+ ####set of commands
+ }
+
+examples:
+ex:1
+#!/bin/bash
+ myecho()
+ {
+ echo “Welcome to Bash Script”
+ }
+ myecho
+
+ex:2
+
+
+########## exit  command in Shell: ##########
+exit command and Exit Status are not same. both have different purpose
+
+########## Loops and Control statements in Bash ##########
+# compgen -k (to get all loop and control statements keywords)
+if:  
+
+
+if...then...fi statement example:(Simple If)
+--------------------------------------
+echo "##### example for simple if statement #####"
+read -p "Enter First string Value: "   str1
+read -p "Enter Second second Value: "  str2
+if [ $str1 = $str2 ]
+then
+    echo "Both string are same";
+fi
+echo "End of script."
+
+
+if..then..else..fi statement example:(If-Else)
+-------------------------------------------
+echo "##### example for  if else statement #####"
+read -p "Enter third string Value: "   str3
+read -p "Enter fourth second Value: "  str4
+if [ $str3 = $str4 ]
+then
+    echo "Both string are same";
+else
+    echo "Both string are not same";
+fi
+echo "End of script."
+
+
+
+if..elif..else..fi statement example:(Else If ladder)
+------------------------------------------------
+
+if..then..else..if..then..fi..fi..example(Nested if)
+------------------------------------------------
+
+
+The for loop statement:
+Nested for loop statement:
+The while loop statement:
+The until loop statement:
+The select loop statement:
+Using the break statement:
+Using the continue statement:
+
+
+
+
+break
+continue
+return
+trap
+wait
+exec
+ulimit
+umask
+shift
+exit
+
+
+##########  Linking Commands in Bash ##########
+
+<<comment1
+Operator: ;
+syntax: command1;command2
+descritption:Seperates commands that are executed in sequnce
+comment1
+
+echo ##### example for ; #####
+date;pwd  #In this example, pwd is executed only after date command completes.
+echo
+
+
+
+<<comment2
+Operator: &
+syntax: command arg &
+description: The shell executes the command in the background in a subshell. The shell does not wait for the command to finish, and the return status is 0. The & operator runs the command in background while freeing up your terminal for other work.
+comment2
+echo ##### example for & #####
+find . iname "*.sh" >/home/hareesh/out.txt & #In this example, find command is executed in background while freeing up your shell prompt.
+echo
+
+
+
+<<comment3
+Operator: &&
+syntax: command1 && command2
+description:command2 is executed if, and only if, command1 returns an exit status of zero i.e. command2 only runs if first command1 run successfully. 
+comment3
+echo ##### example for && #####
+ls -l && rmdir -v hello && mkdir -v  hello
+echo
+
+
+
+<<comment4
+Operator: ||
+syntax: command1 || command2
+description:command2 is executed if and only if command1 returns a non-zero exit status i.e. command2 only runs if first command fails. 
+comment4
+echo ##### example for || #####
+ls absjh  || mkdir yank
+echo
+
+
+<<comment5
+Operator: |
+syntax: command1 | command2
+description:Linux shell pipes join the standard output of command1 to the standard input of command2.
+comment5
+echo ##### example for | #####
+cat file.txt | head -10 #In this example, output of the cat command is provided as the standard input to the head command
+
+##########  Command substitution in Bash ##########
+#  Command substitution in an echo command
+# syntax: $(command-name)
+echo "##### examples for Command substitution in an echo command #####"
+echo -e "Print effective userid:\n $(whoami)"
+echo -e "print user's login name:\n $(logname)"
+echo
+
+# Command substitution and shell variables
+# syntax: var=$(command-name)
+echo "##### examples for Command Command substitution and shell variables #####"
+NOW=$(date)
+echo "$NOW"
+echo  $NOW
+ # In above both echo statements are true.
+
+SERVERNAME=$(hostname)
+echo $SERVERNAME
+
+
