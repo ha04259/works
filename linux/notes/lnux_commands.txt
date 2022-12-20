@@ -1,0 +1,1010 @@
+
+How to use this document effectively:
+Tip: main topic starts like ############ 1.Main topic ############
+Tip: sub topic starts like  ***** a.sub topic *****
+
+
+############ 1. Linux file system hierarchy: ############
+********** 1.1. using tree command to display filesystem hierarchy **********
+[root@minikube /]# tree -L 1 /
+/
+|-- bin -> usr/bin
+|-- boot
+|-- dev
+|-- etc
+|-- home
+|-- lib -> usr/lib
+|-- lib64 -> usr/lib64
+|-- media
+|-- mnt
+|-- opt
+|-- proc
+|-- root
+|-- run
+|-- sbin -> usr/sbin
+|-- srv
+|-- sys
+|-- tmp
+|-- usr
+`-- var
+
+19 directories, 0 files
+
+Note: if you don't have tree package in your machine install by using below command
+yum install -y tree      --for RHEL,Centos and Fedora
+apt-get install -y tree  --for debian, ubuntu
+
+***** 1.2.understanding linux files sytem each directory: *****
+********** 1.2.1 understanding / **********
+/     -- top level hierarchy(we can also call it as root directory of Linux OS)
+********** b. understanding /usr/bin **********
+/bin  -- binary files. containing all linux commands. for normal users
+examples for linux command binaries:
+examples:
+# ls -l /bin/mkdir
+# ls -l /bin/cp
+********** 1.2.2 understanding /boot **********
+/boot -- The /boot/ directory contains static files required to boot the system, such as the Linux kernel. 
+         These files are essential for the system to boot properly.
+********** 1.2.3 understanding /dev **********
+********** e. understanding /etc **********
+/etc  -- directory contains configurations.(user configuration, system configurations and network configurations)
+examples:
+cat  /etc/passwd
+cat  /etc/shadow
+********** 1.2.4 understanding /home **********
+/home -- home directory for normal users
+********** 1.2.5 understanding /usr **********
+********** 1.2.6 understanding /usr/bin **********
+********** 1.2.7 understanding /usr/sbin **********
+********** 1.2.8 understanding /usr/lib **********
+********** 1.2.9 understanding /usr/lib64 **********
+********** 1.2.10 understanding /media **********
+********** 1.2.11 understanding /mnt **********
+********** 1.2.12 understanding /opt **********
+/opt  -- optional directory. this can be used for install third party softwares
+example:
+# mkdir tomcat
+********** 1.2.13 understanding /proc **********
+********** 1.2.14 understanding /root **********
+/root -- home directory for root user
+********** 1.2.15 understanding /run **********
+********** 1.2.16 understanding /srv **********
+********** 1.2.17 understanding /sys **********
+********** 1.2.18 understanding /var **********
+/var  -- to mangae logs
+example:
+# tail -f /var/log/messages
+
+
+
+
+############ 2. File types in Linux:############
+********** a.Normal files or Regular files(-): **********
+example:
+-rw-r--r--   1 anil anil  81K Mar  4 10:09  output.txt
+
+********** b.Directories(d): **********
+
+example:
+drwxr-xr-x  30 anil anil 4.0K Mar  4 12:16  Documents
+
+********** c.Linked files: **********
+linked files two types: softlink and hard link
+softlink or symbolic link: softlink is simple a shortcut for file
+
+example for file:
+ln -s file.txt file
+ln -svf file.txt file
+example for directory:
+ln -sv dir1 dir1_sl
+
+hard link: hardlink is backup file
+example for file:
+ln file.txt file
+
+********** d.Device files: **********
+To find files:
+sudo find / -type f -ls
+To find directories:
+sudo find / -type d -ls
+To find softlink:
+sudo find / -type l -ls
+To find character device files:
+sudo find / -type c -ls
+To find block device files:
+sudo find / -type b -ls
+To find local domain sockets:
+sudo find / -type s -ls
+To find Named pipes:
+sudo find / -type p -ls
+**********UNIX and Linux files colors: **********
+Blue = Directory
+white = normal file 
+Sky blue = Linked files(soft link and hard link have normal color)
+yellow with black background: device
+green = executable file
+red=archive file or zip file
+
+############ a.user prompts ############
+prompt: user prompt can help you to identify type of user(either Normal user or root user)
+# -- root user
+$ --normal user
+
+terminal properties:
+hareesh@linuxmint:~$
+
+############ b.switch user: ############
+********** switch to root user: **********
+su: su stands switch user, this command is used switch from one user to another.
+$ su 
+(or)
+$ su -
+(or)
+$ su - root
+(or)
+$ su - root
+Note: In above commands if you get permission denied access, use below command
+$ sudo su -
+
+
+********** switch to normal user: **********
+$ su karunya
+or
+$ su - kiran
+
+
+
+############ 5. Execute commands with root priviliges(sudo) ############
+sudo: super user do
+$ sudo find / -iname passwd
+$ sudo su root
+
+importnat file:  /etc/sudoers --> to open this file we need to use 'visudo' command. never use sudo vi /etc/sudoers
+
+explore more about /etc/sudoers file
+############ 6. How to switch users default home directory: ############
+# cd
+or
+# cd ~
+********** to move parent directory or top directory or root directory: **********
+# cd /
+############ 7. basic commands: ############
+command syntax:
+[cmd] [options] [arguments]
+
+Note: 
+1. each linux command can have options 
+2. each linux command may have argument or not
+example: 
+# ls
+# ls -ltrh
+# ls -ltrh /home/hareesh
+
+Important points:
+1. In above ls, ls -ltrh and ls -ltrh /home/hareesh are valid commands.
+2. ls command supports options and arguments
+3. commands in linux case-sensitive
+
+********** 7.1 which command **********
+- shows the full path of (shell) commands. 
+example:
+# which bash   
+# which ls
+# which mkdir
+********** 7.2 whereis command **********
+- locate the binary, source, and manual page files for a command
+examples:
+# whereis touch
+# whereis whomai
+# whereis rm
+********** 7.3 whatis command **********
+- display manual page descriptions (oneline definition of command)
+examples:
+# whatis who  
+# whatis logname
+# whatis whoami
+********** 7.4 pwd command **********
+- print name of current/working directory
+# pwd
+********** 7.5 who command **********
+- show who is logged on
+
+examples:
+# who
+# who -H --human readable format
+# who -q --all login names and number of users logged on
+# who -b --time of last system boot
+
+********** 7.5.1 finger command **********
+- user information lookup program or same as who command
+
+# finger
+
+********** 7.6 logname command **********
+- print user's login name
+# logname
+********** 7.7 whoami command **********
+- print effective userid(who's using terminal)
+# whoami
+
+********** 7.8 ls command **********
+- list directory contents
+
+examples:
+# ls             
+# ls -al          --hidden files
+# ls -i          --inode number
+# ls -R world    --list subdirectories recursively
+# ls -S          --sort by file size
+
+
+# ls -ltrh
+-l --longlist
+-t --sort by modification time, newest first
+-r --reverse order while sorting
+-h --human-readable
+
+# ls -l /home/anil /home/hari
+********** 7.9 touch command **********
+# touch  -- to create empty files
+examples:
+# touch hello.txt
+# touch hello1.txt hello2.txt
+# cat -- to create file with content and read files
+examples:
+# cat>hello.txt
+hi
+hello
+ctrl+d --> to save and exit
+# cat hello.txt
+# cat>>hello.txt
+hei
+ctrl+d -->to save and exit
+# cat hello.txt
+to override contnet
+# cat>hello.txt
+new world
+ctrl+d -->to save and exit
+# cat hello.txt
+
+to change time stamp
+touch [existing file name]
+touch hello.txt
+
+********** 7.10 mkdir command **********
+- make directories (create directories)
+
+examples:
+# mkdir hello  --this command creates directory hello
+# mkdir hello1 hello2 hello3 --this command creates 3 directories with names hello1 hello2 and hello3
+# mkdir -p world/asia/india/karnataka/bengaluru -- this command creates parent directory
+# ls -R world -- to list parent directory(shows subdirectories recursively)
+# cd world/asia/india/karnataka/bengaluru -- to navigate to directory
+# cd ../.. (to comeout)
+********** 7.11 rm command **********
+- remove files or directories
+
+examples:
+# rm hello.txt    -- remove file
+# rm -i hello.txt -- prompt before every removal
+# rmdir hello.txt -- empty directory
+# rm -rfv movies  -- remove file
+-r (or) -R  --recursive   remove directories and their contents recursively 
+-v,         --verbose     explain what is being done
+-f,         --force       ignore nonexistent files and arguments, never prompt
+
+
+# rm *.txt        -- remove all files ends with *.txt
+# rm -rfv Test*   -- remove directories name start with Test
+
+********** 7.12 mv command **********
+-- move and rename files
+
+examples: 
+# mv hello.txt test.txt --to rename file
+# mv hello test         --to rename directory
+
+# mv hello.txt hello    --to move file from source to destination directory
+# mv hello hello1       --to move directory from source to destination directory
+
+********** 7.13 cp command **********
+- copy files and directories
+syntax:
+# cp -v test.txt hello.txt              -- copy file content from test.txt to hello.txt 
+# cp -v fil1 file2 file3 [directory]    -- copying multiple files from source to destination directory location
+# cp -vr [director/files] [directory]   -- copying directory along with content to destination directory location
+# cp -p hello.txt [directory/hello.txt] -- copying files with properties
+
+********** 7.14 cal command **********
+- display a calendar
+examples:
+# cal
+# cal 2010
+# cal 2012
+# cal 2 2018
+# history 1>cmd.txt
+********** 7.15 date command **********
+- print or set the system date and time
+# date
+********** 7.16 clear command **********
+- clear the terminal screen
+example:
+# clear
+
+shortcut: ctrl + l
+
+********** 7.17 history command **********
+# history
+# history | head
+# history | tail
+
+********** 7.18 sort command **********
+- sort lines of text files
+examples:
+# cat sc_lang.txt 
+Shellscript
+Javascript
+Perl
+Python
+Ruby
+PHP
+Python
+
+# sort -u sc_lang.txt  --unique
+Javascript
+Perl
+PHP
+Python
+Ruby
+Shellscript
+
+# sort -d sc_lang.txt  --dictionary order
+Javascript
+Perl
+PHP
+Python
+Python
+Ruby
+Shellscript
+
+********** 7.19 tee command **********
+- read from standard input and write to standard output and files
+
+
+********** 7.20 wc command **********
+word count
+examples:
+wc -m a.txt   --print the character counts
+wc -w a.txt   --print the word counts
+wc -w a.txt   --print the newline counts
+********** 7.21 uname command **********
+- print system information
+examples:
+# uname
+# uname -o
+# uname -a
+
+How To Find Out My Linux Distribution Name and Version
+# ls -l /etc/*release
+# cat /etc/*-release
+# lsb_release -a
+# hostnamectl
+
+
+
+############ 8. man pages and help command ############
+# man [commandname]
+# man mkdir
+# man mkdir |grep "version"
+# [command] --help
+# mkdir --help
+# mkdir --help |grep "version"
+# mkdir --help |grep "verbose"
+
+############ 9.viewing files ############
+# cat messages
+# cat -n messages
+# cat messages |head -20
+# cat messages |tail -20
+# head messages
+# tail messages
+# head -20 messages
+# tail -20 messages
+# tail -f messages [to check growing log]
+# more messages [observe by pressing space bar key]
+# less messages [observe by pressing space bar key]
+
+############ 10. user and group management ############
+********** 9.1 to create user hari **********
+# useradd hari  
+
+when you create user below actions will happen:
+1. user home directory is created at /home/username
+# cd /home
+# ls -l
+
+2. The following hidden files are copied into the user’s home directory, and will be used to provide environment variables for his/her user session.
+# ls -l /home/username
+.bash_logout
+.bash_profile
+.bashrc
+3. A mail spool is created for the user at /var/spool/mail/username.
+# cd /var/spool/mail/
+# ls -ltrh
+-rw-rw----. 1 hari mail 0 Mar  7 02:09 hari
+
+4. Understanding /etc/passwd
+The full account information is stored in the /etc/passwd file. This file contains a record per system user account and has the following format (fields are delimited by a colon).
+
+[username]:[x]:[UID]:[GID]:[Comment]:[Home directory]:[Default shell]
+
+-- Fields [username] and [Comment] are self explanatory.
+-- The x in the second field indicates that the account is protected by a shadowed password (in /etc/shadow), which is needed to logon as [username].
+   # id
+-- The [UID] and [GID] fields are integers that represent the User IDentification and the primary Group IDentification to which [username] belongs, respectively.
+-- The [Home directory] indicates the absolute path to [username]’s home directory, and
+-- The [Default shell] is the shell that will be made available to this user when he or she logins the system.
+
+# grep hari /etc/passwd
+hari:x:1000:1000::/home/hari:/bin/bash
+
+5. Understanding /etc/group
+Group information is stored in the /etc/group file. Each record has the following format.
+
+[Group name]:[Group password]:[GID]:[Group members]
+-- [Group name] is the name of group.
+-- An x in [Group password] indicates group passwords are not being used.
+-- [GID]: same as in /etc/passwd.
+-- [Group members]: a comma separated list of users who are members of [Group name].
+
+# grep hari /etc/group
+hari:x:1000:
+********** 9.2 to create password for user hari **********
+# passwd hari # 
+# grep hari /etc/shadow
+hari:!!:17961:0:99999:7:::
+
+
+# userdel -r hari # to delete user hari with all it's content
+verify user content deleted or not
+# cd /var/spool/mail/
+# cd /home/
+
+
+# usermod [options] hari # to modify user hari default settings
+# usermod -L hari --Lock User Account
+# usermod -U hari --Unlock user Account
+# usermod -c "IT-DEPARTMENT" hari --Adding Information(comment) to User Account
+# usermod -d /var/www/ hari  --Change User Home Directory
+# usermod -e 2019-11-01 hari -- Set User Account Expiry Date 
+# chage -l tecmint     --Change user password expiry information
+# usermod -g test1 hari --Change User Primary Group
+# usermod -G test hari  --Adding Group to an Existing User
+# usermod -a -G my_project hari --adding supplementary and primary group to user
+# usermod -l hareesh hari --Change User Login Name
+# usermod -d /var/hari/ -m hari --Move User Home Directory to New location
+# grep hari /etc/passwd
+
+
+
+
+
+# cat /etc/passwd # created users entry will update here
+# cat /etc/shadow # passwords save here
+# groupadd my_project #to create new group
+# gpasswd my_project #to create password for project group
+# gpasswd -r my_project # to remove a password for project group 
+# groupdel [groupname] # to delete group
+# groupmod [options] [groupname] # to modify group details
+# grep my_project /etc/group
+my_project:x:1001:
+# grep my_project /etc/gshadow
+my_project:$6$eIcibDUGT2Y.KXW$n32fpEtnj.QB9jj6X6C09T1JP/DMXzFiyu9/bXnsTVQNS6m3fyQizcpkIQVTPbTduslQYyl6xI60Cn7hfo3oN0::
+
+
+
+usermod -ag my_project hari
+
+############ 10.permissions ############
+-rw-r--r--. 1 root root    0 Mar  7 03:18 test1.txt
+
+three rwx sets:
+1st rwx set is: userpermission
+2nd rwx set is: grouppermission
+3rd rwx set is: otherpermission
+1 --> no of hard links
+root --> user
+root --> group
+0    --> file size
+Mar  7 03:18 --> time
+test1.txt ---> file
+
+what is rwx:
+r=read
+w=write
+x=execute/search
+-=denied (or) 0=denied
+
+numeric values of rwx:
+r=4
+w=2
+x=1
+
+(or)
+u=rwx
+g=rwx
+o=rwx
+
+********** 10.1 chmod command **********
+chmod: chmod is used to change the permissions of files or directories
+chmod 777 file.txt
+chmod 400 file.txt
+
+********** 10.2 chown command **********
+chown: change ownership to file and directory
+chown hari file.txt
+
+********** 10.3 chgrp command **********
+chgrp: change file group
+chgrp project file.txt
+
+Note: Ignore all permissions on symbolic links
+
+task:
+# groupadd project
+# usermod -g project hari
+# usermod -g project karunya
+# cd /
+# mkdir project_work
+# chmod 777 project_work
+hari@hostname:~$ mkdir hello
+karunya@hostname:~$ mkdir hello1
+
+############ 11. process management ############
+********** 11.1. ps command **********
+- report a snapshot of the current processes.
+
+# ps --help
+examples:
+# ps -e   --all processes
+# ps r    --only running processes
+# ps T    --all processes on this terminal
+# ps -ef | grep 'java'
+# ps -ef | grep 'mysql'
+********** 11.2. kill command **********
+- terminate a process
+
+examples:
+to kill a process by pid:
+# kill <pid> (pid stands procees id)
+# kill 1288
+# kill -9 5124 (force kill)
+
+
+to kill a process by name:
+# pkill <pname>
+# pkill tomcat
+# pkill python
+
+********** 11.3. top command **********
+- display Linux processes
+
+examples:
+# top
+to check more cpu using process: shift+p
+to check more memory using process:shift+m
+
+
+
+few important interview questions:
+1. difference between ps and top?
+2. how to kill particular running process?
+3. how to check more cpu and more memory using process?
+********** 11.4. netstat command **********
+# netstat
+############ 12. disk utility commands ############
+********** 12.1. du command **********
+du -- disk usage or - estimate file space usage
+examples:
+du -h /home/anil/test
+
+********** 12.2. df command **********
+df -- disk free or - report file system disk space usage
+examples:
+df -h
+
+********** 12.3. df command **********
+free -- Display amount of free and used memory in the system
+
+examples:
+# free -b 
+# free -k
+# free -m
+# free -g
+# free -t
+# free -p
+# free -hm
+
+############ 13. comparing files ############
+********** 13.1. vimdiff command **********
+example:
+vimdiff t1.txt t2.txt
+
+Note: If you don't have vim package in your machine plase use below command to install
+yum install -y vim      --for RHEL,Centos and Fedora
+apt-get install -y vim  --for debian, ubuntu
+
+********** 13.2. diff command **********
+- compare files line by line
+example:
+# diff a.txt b.txt
+********** 13.3. sdiff command **********
+- side-by-side merge of file differences
+example:
+# sdiff a.txt b.txt
+
+############ 14. vi editor ############
+Vi IMproved, a programmers text editor
+
+********** 14.1. best practice commands in vi **********
+vim [filename]
+:set nu (by pressing : key to enter line mode)
+: n     (by pressing : key to enter line mode)
+esc     (enter esc key to enter command mode)
+i       (enter i key to enter insert mode)
+/ [search keyword]
+:wq    (save)
+:q! (quit without save)
+
+********** 14.2. view command **********
+view : to view file in readonly mode
+example: 
+a.txt
+
+############ 15. find command ############
+- search for files and directories in a directory hierarchy
+examples:
+
+############ 16. grep command ############
+- print lines matching a pattern
+examples:
+
+############ 17. network utility commands ############
+to check your ip address
+# ifconfig
+(or)
+# ip addr
+
+############ 18. TCP and UDP default ports ############
+Overview of common TCP and UDP default ports:
+smtp:25
+ssh :22
+http:80
+https:443
+ftp:20,21
+telnet:23
+imap:143
+rdp:3389
+dns:67,68
+pop3:110
+reference:
+https://www.examcollection.com/certification-training/network-plus-overview-of-common-tcp-and-udp-default-ports.html
+############ 19. Package mgmt in Linux Distributions ############
+********** 19.1. rhel/centos/fedora systems  **********
+a) install software from .rpm file
+step 1:download rpm file to your local machine
+step 2:go to rpm dowload location
+step 3:execute below command
+# rpm -ivh jenkins-2.164.2-1.1.noarch.rpm
+
+if you need help related to rpm commands.
+rpm --help
+
+b) install software from yum repository
+installing software from yum repository is very simple, directly execute command in your terminal
+# yum install vim
+
+c) install software from source
+
+********** 19.2. ubuntu/debian systems  **********
+a) install software from .deb file
+step 1:download .deb file to your local machine
+step 2:go to .deb dowload location
+step 3:execute below command
+# dpkg -i jenkins-2.164.2-1.1.noarch.deb
+
+b) install software from apt repository
+installing software from apt repository is very simple, directly execute command in your terminal
+# apt-get install vim
+c) install software from source
+
+
+difference between tar ball installation vs apt-get installation vs dpkg installation vs install from source
+
+############ 20. download ############
+
+# wget --help
+# wget https://www-us.apache.org/dist/tomcat/tomcat-7/v7.0.94/src/apache-tomcat-7.0.94-src.tar.gz
+
+# curl --help
+# curl https://www.google.com
+
+############ 21. compression and archiving ############
+compression:
+example: .bz2
+# bzip2 filename
+# ls
+filename.bz2
+# bunzip2 filename.bz2
+
+
+example: .gz
+# gzip filename
+# ls 
+ filename.gz
+# gunzip filename.gz
+
+example:.zip
+# zip -r filename.zip filesdir
+# unzip filename.zip
+
+
+archiving files with compression:
+example:
+# tar -cvf filename.tar directory  --to create tar file
+# tar -tvf filename.tar   --to list contents of tar file
+# tar -xvf filename.tar  --to extract tar file
+
+example:
+# tar -cjvf filename.tbz file #bzip2 compression
+# tar -xjvf filename.tbz  
+
+example:
+# tar -czvf filename.tgz file #gzip
+# tar -xzvf filename.tgz #extract
+
+# compress -v filename
+# uncompress filename.z
+# zcat filename.z
+
+# pack sample
+# unpack sample.z
+# pcat sample.z
+
+
+############ 22. scp(secure copy) ############
+-- SCP stands Secure copy protocol (SCP) 
+-- SCP helps securely transferring computer files between a client machine to a remote machine or between two remote machines. 
+-- It is based on the Secure Shell (SSH) protocol.
+
+Copying file to host:
+=====================
+scp SourceFile user@host:directory/TargetFile
+
+example:
+=======
+[root@client scp-client]# scp client_file.txt root@192.168.10.116:/root
+client_file.txt                                                                                                                        100%   89    45.7KB/s   00:00    
+[root@server scp-server]# cd ..
+[root@server ~]# ls
+anaconda-ks.cfg  client_file.txt  scp-server
+
+
+[root@server scp-server]# scp server_file.txt root@192.168.10.126:/root
+server_file.txt                                                                                                                        100%   88    48.5KB/s   00:00    
+[root@client scp-client]# cd ..
+[root@client ~]# ls
+anaconda-ks.cfg  scp-client  server_file.txt
+
+
+Copying file from host:
+=======================
+scp user@host:directory/SourceFile TargetFile
+scp -r user@host:directory/SourceFolder TargetFolder
+
+
+[root@client ~]# scp -r root@192.168.10.116:/root/hello.txt .
+hello.txt                                                                                                                              100%   15     6.4KB/s   00:00    
+[root@client ~]# ls -ltrh
+total 12K
+-rw-------. 1 root root 1.2K Feb 28 22:11 anaconda-ks.cfg
+drwxr-xr-x. 2 root root   56 Feb 28 22:43 scp-client
+-rw-r--r--. 1 root root   88 Feb 28 22:53 server_file.txt
+-rw-r--r--. 1 root root   15 Feb 28 22:59 hello.txt
+
+write command: write command can be used by any user to write something on someone's terminal
+==============
+[root@centos home]# write anil
+hi anil how are you, root user here
+ctrl + d --> to save file
+
+anil terminal output:
+=====================
+[anil@centos ~]$ 
+Message from root@centos on pts/0 at 06:29 ...
+hi anil how are you, root user here
+EOF
+
+
+mail command:
+============
+package reuired for to process messages on command line
+# yum install -y mailx
+
+mail -s "Welcome to programming" hareeshha04259@gmail.com -A hi.txt
+-s – specifies the message subject.
+-A – helps to attach a file.
+-r - sender mail id
+
+mailx -s "Welcome to programming" -r "hareeshha04259@gmail.com"  prasad.itengineer@gmail.com -A hi.txt
+
+
+*******network commands******
+$ ip addr
+or
+$ ifconfig
+
+example:
+hareesh@linuxmint:~$ ip addr
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: enp5s0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc fq_codel state DOWN group default qlen 1000
+    link/ether e8:9a:8f:cf:f6:ac brd ff:ff:ff:ff:ff:ff
+3: wlp6s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 74:de:2b:24:1c:4d brd ff:ff:ff:ff:ff:ff
+    inet 192.168.10.121/24 brd 192.168.10.255 scope global dynamic noprefixroute wlp6s0
+       valid_lft 77182sec preferred_lft 77182sec
+    inet6 fe80::8b65:c8d1:8ca5:e230/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+
+from above output
+1. lo -->local network
+2. enp -->on board ethernet(wired) adapter
+3. wlp -->wireless
+
+
+to check file system hard disks:
+# fdisk -l
+
+to check available file systems:
+# mkfs -t
+
+temporary mounting 
+# mkdir test
+mount /dev/vdb1 /test # this will loose partition after rebooting 
+
+permanent mounting
+vim /etc/fstab
+
+hareesh@linuxmint:~$ netstat -i
+Kernel Interface table
+Iface      MTU    RX-OK RX-ERR RX-DRP RX-OVR    TX-OK TX-ERR TX-DRP TX-OVR Flg
+docker0   1500        0      0      0 0             0      0      0      0 BMU
+enp5s0    1500        0      0      0 0             0      0      0      0 BMU
+lo       65536    26829      0      0 0         26829      0      0      0 LRU
+wlp6s0    1500   946185      0      0 0        508823      0      0      0 BMRU
+
+
+
+understanding #!
+The #! syntax used in scripts to indicate an interpreter for execution under UNIX / Linux operating systems. Most Linux shell and perl / python script starts with the following line:
+#!/bin/bash
+#!/usr/bin/perl
+#!/usr/bin/python
+
+
+
+
+4. command editor and text editor for shell scrits
+command editor:
+vi
+
+text editors:
+sublimetext
+vscode
+
+########## 2. Comments in shell script ##########
+comments help to understand code better
+
+single line comments:
+#!/bin/bash    
+
+###################################################################
+#Script Name	:                                                                                              
+#Description	:                                                                                 
+#Args           	:                                                                                           
+#Author       	:Hareesh Arava                                                
+#Email         	:hareeshops@gmail.com                                           
+###################################################################
+echo "Hello world"
+
+
+
+
+
+
+
+
+
+
+
+
+########## Arithmetic operators ##########
+
+
+
+#!/bin/bash
+echo "enter 2 numbers"
+read a
+read b
+c=`expr $a + $b`
+echo "addition of a+b=$c"
+
+d=`expr $a - $b`
+echo "subtraction of a-b=$d"
+
+e=`expr $a \* $b`
+echo "multiplication of a*b=$e"
+
+f=`expr $a / $b`
+echo "division of a/b=$f"
+
+g=`expr $a % $b`
+echo "modulo division of a%b=$g"
+
+########## cron --scheduling ##########
+    
+ ───────────── minute (0 - 59)
+│ ┌───────────── hour (0 - 23)
+│ │ ┌───────────── day of month (1 - 31)
+│ │ │ ┌───────────── month (1 - 12)
+│ │ │ │ ┌───────────── day of week (0 - 6) (Sunday to Saturday;
+│ │ │ │ │
+7 is also Sunday)
+│ │ │ │ │
+│ │ │ │ │
+* * * * * command to execute
+
+
+
+Important files related to cron:
+/etc/cron.monthly – This file is used to scheduling the jobs for
+monthly
+/etc/cron.weekly – This file is used to scheduling the jobs for weekly
+/etc/cron.daily – This file is used to scheduling the jobs for daily
+/etc/cron.hourly – This file is used to scheduling the jobs for hourly
+/etc/cron.deny – This file is used to scheduling the jobs
+
+
+to check all asigned cronjobs
+# crontab -l
+To remove all the scheduling jobs
+# crontab -r
+To schedule cronjobs for particular user
+# crontab -u <username> -e
+To Check
+cronjobs
+for particular user
+# crontab -u <username> -l
+To Remove cronjobs for particular user
+# crontab -u <username> -r
+
+to check cron status:
+RHEL and centos
+
+service crond status
+service crond stop
+service crond start
+
+On Ubuntu and Debian
+
+service cron status
+service cron stop
+service cron start
+
+
