@@ -1,4 +1,4 @@
-# Below are prerequisites for to launch EKS cluster 
+# Below are prerequisites for to launch EKS cluster in AWS
 choco install curl -y
 curl --version
 
