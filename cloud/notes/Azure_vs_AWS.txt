@@ -1,0 +1,34 @@
+##########   Azure vs AWS Core Services  ##########
+Step:1 
+Azure Virtual Network(Vnet) (AWS VPC)
+Azure Virtual machines (AWS EC2)
+Azure Blob Storage (Amazon Elastic Blcok storage EBS)
+(AWS Elastic IP)
+Key Pairs (AWS Key Pairs)
+Network Security Group (AWS Security Group)
+Load Balancer(AWS NLB (network load balancer)
+Application gateway (AWS Application load balancer)
+Virtual machine scale sets(vmss) (AWS Autoscaling)
+Reference : https://learn.microsoft.com/en-us/azure/architecture/aws-professional/networking
+
+Step:2
+Azure Database (AWS RDS)
+Blob storage (AWS S3)
+Azure Active Directory (AWS IAM)
+Azure Monitor (AWS Cloudwatch)
+Service Bus (AWS SNS)
+Azure DNS (AWS Route53)
+
+Step:3
+Azure Resource Manager(ARM) (AWS Cloudformation) -- alternate --> Terraform
+Azure Functions (AWS Lambda)
+Azure VNet Peering (VPC Peering)
+Queue Storage(Simple Queue Service)
+Activty log (AWS Cloud trail)
+
+########## Kubernets Specific ##########
+Step:4
+Azure Container Apps (Amazon Elastic Container Service (Amazon ECS), AWS Fargate)
+Azure Container Registry ( Amazon elastic Container Registry (Amazon ECR))
+Azure Kubernetes Service (AKS) (Amazon Elastic Kubernetes Service (EKS))
+Open Service Mesh on AKS ( AWS App Mesh)
