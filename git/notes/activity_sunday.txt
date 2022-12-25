@@ -72,3 +72,4 @@ git clone repo
 git fetch origin master
 git branch -a
 git merge origin/master
+git pull = git fetch origin master + git merge origin/master
