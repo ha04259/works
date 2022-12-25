@@ -1,0 +1,74 @@
+to check operating system 
+cat /etc/*release
+
+install git 
+sudo apt-get update
+sudo apt-get install -y git
+
+Identify the version of git you just installed.
+git --version
+
+to show various git objects
+git show 
+
+
+list, create and delete branches
+ 
+
+apt-get install git-man
+
+mkdir hello
+git init hello --bare
+
+sarah (feature/signout)$ git log --graph --decorate
+
+
+checkout <-- cart <--master
+signout <---signup <--- master
+
+
+signup <--- master
+
+ =================
+ hareesh : http://git.example.com/sarah/story-blog
+prasad:
+
+git clone https://git.example.com/sarah/story-blog
+username and password
+ssh 
+access token: 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
+
+
+ssh-- git@github.com:ha04259/works.git
+https/access token --git clone https://github.com/ha04259/works.git
+
+
+======================
+git log --graph --decorate
+
+git init 
+rmote not configured
+
+
+git clone
+remote configured as we did cloned repo
+
+
+git branch
+master
+develop
+prasad
+
+git push origin master
+git push origin prasad
+
+pull request 
+
+==========================
+============fetch/pull===============
+remote repo contains -- master branch + 2 commis 
+
+git clone repo
+git fetch origin master
+git branch -a
+git merge origin/master
