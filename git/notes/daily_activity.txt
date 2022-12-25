@@ -1,0 +1,43 @@
+#### Prasad refer this doc ####
+prasad joined new company
+
+1. project helloworld
+
+2. helloworld have 2 branches
+   master (production copy)
+   develop (production copy + 2 weeks sprint stories)
+
+3. asked prasad clone repo his local system and also create feature branch from develop 
+   git clone helloworld.git
+   git branch 
+   * master
+   git checkout -b develop origin/develop
+   git branch 
+   * develop
+   master
+   git checkout -b feature
+   git branch
+   * feature
+   master
+   develop
+   
+4. currently you're in feature branch
+  adding your stories to coming sprint
+   git add .
+   git commit -m "Added my sprint story"
+   
+5. code is ready to be pushed to remote repository (2 options)
+   option :1
+   steps to create origin:
+   git remote add origin helloworld.git
+   git remote -v
+   a) push directly origin repo (original repo) 
+     fit push origin feature
+	 
+   b) create Pull Request from feature to develop
+      develop <--- feature
+	option :2
+   git remote add sprasad sprasad:helloworld.git
+   git remote -v
+   a) push your changes to your fork repo(fork repo)
+      git push sprasad  feature
